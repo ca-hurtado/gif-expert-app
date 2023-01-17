@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { Col, Container, Navbar, Row } from 'react-bootstrap';
+import { Col, Container, Form, Navbar, Row } from 'react-bootstrap';
 import { AddCategory, GifGrid } from './components';
 
 export const GifExpertApp = () => {
@@ -28,22 +28,25 @@ export const GifExpertApp = () => {
 
     return (
         <>
-            <Navbar bg='dark' variant='dark'>
-                <Container>
+            <Navbar bg='dark' variant='dark' expand='lg'>
+                <Container fluid>
                     <Navbar.Brand href='#home'>GIF Expert App</Navbar.Brand>
+                    <Navbar.Toggle aria-controls="navbarScroll" />
+                    <Navbar.Collapse className="justify-content-end">
+                        <Form className='d-flex'>
+                            <Form.Control type='text'
+                                className='me-2 bg-transparent text-light'
+                                value={inputValue}
+                                placeholder={inputValue}
+                                onChange={e => setInputValue(e.target.value)} />
+                        </Form>
+                    </Navbar.Collapse>
                 </Container>
-                <Navbar.Collapse>
-                    <input type="text"
-                        value={inputValue}
-                        placeholder={inputValue}
-                        onChange={e => setInputValue(e.target.value)} />
-                </Navbar.Collapse>
             </Navbar>
             <Container>
                 <Row>
                     <AddCategory
                         onNewCategory={onAddCategory} />
-
                 </Row>
                 <Row>
                     {
