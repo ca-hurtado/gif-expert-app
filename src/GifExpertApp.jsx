@@ -29,13 +29,13 @@ export const GifExpertApp = () => {
     return (
         <>
             <Navbar bg='dark' variant='dark' expand='lg'>
-                <Container fluid>
+                <Container>
                     <Navbar.Brand href='#home'>GIF Expert App</Navbar.Brand>
                     <Navbar.Toggle aria-controls="navbarScroll" />
                     <Navbar.Collapse className="justify-content-end">
                         <Form className='d-flex'>
                             <Form.Control type='text'
-                                className='me-2 bg-transparent text-light'
+                                className='bg-transparent text-light'
                                 value={inputValue}
                                 placeholder={inputValue}
                                 onChange={e => setInputValue(e.target.value)} />
@@ -44,20 +44,21 @@ export const GifExpertApp = () => {
                 </Container>
             </Navbar>
             <Container>
-                <Row>
+                <Row className='my-3'>
                     <AddCategory
                         onNewCategory={onAddCategory} />
                 </Row>
-                <Row>
-                    {
-                        filteredCategories.map(category => (
+                {
+                    filteredCategories.map(category => (
+                        <Row className='my-5' key={category}>
                             <GifGrid
                                 key={category}
                                 category={category}
                                 onRemoveCategory={onRemoveCategory} />
-                        ))
-                    }
-                </Row>
+                        </Row>
+                    ))
+                }
+
             </Container>
         </>
     )

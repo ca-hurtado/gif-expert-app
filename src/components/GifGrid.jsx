@@ -10,15 +10,15 @@ export const GifGrid = ({ category, onRemoveCategory }) => {
     const imagesArray = arrayBreak(images, 5);
     return (
         <>
-            <h3>{category}</h3>
-            {
-                isLoading && (<h2>Cargando...</h2>)
-            }
-            <div className='card-grid'>
-                <Container>
+            <Container>
+                <h3>{category}</h3>
+                {
+                    isLoading && (<h2>Cargando...</h2>)
+                }
+                <div className='card-grid'>
                     {
                         imagesArray.map((images, i) => (
-                            <Row key={i} className="spacer-vt">
+                            <Row key={i} className="my-3">
                                 {
                                     images.map((image, i) => (
                                         <GifItem
@@ -31,11 +31,10 @@ export const GifGrid = ({ category, onRemoveCategory }) => {
                                 }
                             </Row>
                         ))
-
                     }
-                </Container>
-            </div>
-            <Button variant='danger' onClick={() => onRemoveCategory(category)}>Eliminar Categoría</Button>
+                </div>
+                <Button variant='danger' onClick={() => onRemoveCategory(category)}>Eliminar Categoría</Button>
+            </Container>
         </>
     )
 }
