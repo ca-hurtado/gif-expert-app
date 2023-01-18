@@ -1,12 +1,11 @@
-import { GifItem } from './GifItem';
+import { GifGridItem } from './GifGridItem';
 import { useFetchGifs } from '../hooks/useFetchGifs';
 import { Button, Container, Row } from 'react-bootstrap';
 import { arrayBreak } from '../helpers/arrayBreaker';
-import { useEffect } from 'react';
 
-export const GifGrid = ({ category, onRemoveCategory }) => {
+export const GifGrid = ({ type, category, onRemoveCategory }) => {
 
-    const { images, isLoading } = useFetchGifs(category);
+    const { images, isLoading } = useFetchGifs(type, category, 10);
     const imagesArray = arrayBreak(images, 5);
     return (
         <>
@@ -15,14 +14,13 @@ export const GifGrid = ({ category, onRemoveCategory }) => {
                 {
                     isLoading && (<h2>Cargando...</h2>)
                 }
-                <div className='card-grid'>
+                <div>
                     {
                         imagesArray.map((images, i) => (
                             <Row key={i} className="my-3">
                                 {
                                     images.map((image, i) => (
-                                        <GifItem
-                                            index={i}
+                                        <GifGridItem
                                             key={image.id}
                                             {...image}
                                         />

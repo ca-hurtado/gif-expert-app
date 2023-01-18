@@ -1,15 +1,14 @@
-import { Card, CardImg, Col, Row } from "react-bootstrap"
+import { useFetchGifs } from "../hooks/useFetchGifs";
 
-export const GifItem = ({ id, title, url, index }) => {
+export const GifItem = ({ type }) => {
 
-  return (
-    <Col>
-      <Card>
-        <CardImg variant="top" src={url} alt={title} />
-        <Card.Body>
-          <Card.Title>{title}</Card.Title>
-        </Card.Body>
-      </Card>
-    </Col>
-  )
+    const { images, isLoading } = useFetchGifs(type);
+    return (
+        <>
+            {
+                isLoading && (<p>Now loading...</p>)
+            }
+            <img src={images.url} alt={images.title} className="rounded"></img>
+        </>
+    )
 }

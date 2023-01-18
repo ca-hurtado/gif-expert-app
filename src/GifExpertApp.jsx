@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { Col, Container, Form, Navbar, Row } from 'react-bootstrap';
-import { AddCategory, GifGrid } from './components';
+import { AddCategory, GifGrid, GifItem } from './components';
 
 export const GifExpertApp = () => {
     const [categories, setCategories] = useState(['One Punch']);
@@ -43,23 +43,47 @@ export const GifExpertApp = () => {
                     </Navbar.Collapse>
                 </Container>
             </Navbar>
-            <Container>
-                <Row className='my-3'>
-                    <AddCategory
-                        onNewCategory={onAddCategory} />
-                </Row>
-                {
-                    filteredCategories.map(category => (
-                        <Row className='my-5' key={category}>
-                            <GifGrid
-                                key={category}
-                                category={category}
-                                onRemoveCategory={onRemoveCategory} />
+            <section className='bg-light'>
+                <Container className='py-5 px-0 d-flex'>
+                    <Container className='d-flex align-self-center flex-column'>
+                        <Row>
+                            <Col><h1>Expect de unexpected</h1></Col>
                         </Row>
-                    ))
-                }
+                        <Row>
+                            <Col><p>Search me...</p></Col>
+                        </Row>
+                    </Container>
+                    <Container >
+                        <Row className='d-flex'>
+                            <Col className='align-self-end'>
+                                <GifItem
+                                    type="random"
+                                />
+                            </Col>
+                        </Row>
+                    </Container>
+                </Container>
+            </section>
+            <article>
+                <Container>
+                    <Row className='my-3'>
+                        <AddCategory
+                            onNewCategory={onAddCategory} />
+                    </Row>
+                    {
+                        filteredCategories.map(category => (
+                            <Row className='my-5' key={category}>
+                                <GifGrid
+                                    key={category}
+                                    type="query"
+                                    category={category}
+                                    onRemoveCategory={onRemoveCategory} />
+                            </Row>
+                        ))
+                    }
 
-            </Container>
+                </Container>
+            </article>
         </>
     )
 }
