@@ -31,7 +31,6 @@ export const GifGrid = ({ type, category, onRemoveCategory }) => {
                         ))
                     }
                 </div>
-                <Button variant='danger' onClick={() => onRemoveCategory(category)}>Eliminar Categoría</Button>
             </Container>
         </>
     )

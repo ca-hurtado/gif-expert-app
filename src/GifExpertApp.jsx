@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import { Col, Container, Form, Navbar, Row } from 'react-bootstrap';
 import { AddCategory, GifGrid, GifItem } from './components';
+import { DeleteCategory } from './components/DeleteCategory';
 
 export const GifExpertApp = () => {
     const [categories, setCategories] = useState(['One Punch']);
@@ -33,13 +34,7 @@ export const GifExpertApp = () => {
                     <Navbar.Brand href='#home'>GIF Expert App</Navbar.Brand>
                     <Navbar.Toggle aria-controls="navbarScroll" />
                     <Navbar.Collapse className="justify-content-end">
-                        <Form className='d-flex'>
-                            <Form.Control type='text'
-                                className='bg-transparent text-light'
-                                value={inputValue}
-                                placeholder={inputValue}
-                                onChange={e => setInputValue(e.target.value)} />
-                        </Form>
+
                     </Navbar.Collapse>
                 </Container>
             </Navbar>
@@ -47,13 +42,13 @@ export const GifExpertApp = () => {
                 <Container className='py-5 px-0 d-flex'>
                     <Container className='d-flex align-self-center flex-column'>
                         <Row>
-                            <Col><h1>Expect de unexpected</h1></Col>
+                            <Col><h1>Expect the unexpected</h1></Col>
                         </Row>
                         <Row>
-                            <Col><p>Search me...</p></Col>
+                            <Col><p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. In non ex efficitur, auctor ipsum sit amet, porta tellus. Vestibulum at porttitor est. Aenean nec ipsum justo. Donec consectetur euismod purus sed elementum. Aliquam sed odio elementum, facilisis sem non, lobortis tortor.</p></Col>
                         </Row>
                     </Container>
-                    <Container >
+                    <Container>
                         <Row className='d-flex'>
                             <Col className='align-self-end'>
                                 <GifItem
@@ -64,26 +59,55 @@ export const GifExpertApp = () => {
                     </Container>
                 </Container>
             </section>
-            <article>
-                <Container>
-                    <Row className='my-3'>
-                        <AddCategory
-                            onNewCategory={onAddCategory} />
-                    </Row>
-                    {
-                        filteredCategories.map(category => (
-                            <Row className='my-5' key={category}>
-                                <GifGrid
-                                    key={category}
-                                    type="query"
-                                    category={category}
-                                    onRemoveCategory={onRemoveCategory} />
-                            </Row>
-                        ))
-                    }
-
+            <div className='border'>
+                <Container className='py-3'>
+                    <Form>
+                        <Form.Label>Search...</Form.Label>
+                        <Form.Control type='text'
+                            value={inputValue}
+                            placeholder={inputValue}
+                            onChange={e => setInputValue(e.target.value)} />
+                    </Form>
                 </Container>
-            </article>
+            </div>
+            <div>
+
+                {
+                    filteredCategories.map(category => (
+                        <Container fluid className='bg-light' key={category}>
+                            <Row className='py-5 border border-top-0'>
+                                <Col>
+                                    <GifGrid
+                                        key={category}
+                                        type="query"
+                                        category={category} />
+                                </Col>
+                            </Row>
+                            <Row className='py-3 border border-top-0 bg-white'>
+                                <Col>
+                                    <DeleteCategory category={category}
+                                        onRemoveCategory={onRemoveCategory} />
+                                </Col>
+                            </Row>
+                        </Container>
+                    ))
+                }
+            </div>
+            <div>
+                <Container>
+                    <Col>
+                        <Row className='my-3'>
+                            <AddCategory
+                                onNewCategory={onAddCategory} />
+                        </Row>
+                    </Col>
+                </Container>
+            </div>
+            <footer className='bg-dark text-white'>
+                <Container className='py-3'>
+                    <p>Phasellus non blandit leo. Cras consequat magna eu justo pulvinar, eget ullamcorper risus lobortis. Praesent non orci id arcu aliquam dignissim ut id tortor.</p>
+                </Container>
+            </footer>
         </>
     )
 }

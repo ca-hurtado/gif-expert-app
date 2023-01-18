@@ -17,7 +17,7 @@ export const AddCategory = ({ onNewCategory }) => {
 
     return (
         <div>
-            <h2>Agregar Categoría</h2>
+            <h2>New Category</h2>
             <form onSubmit={onSubmit}>
                 <input
                     type="text"
