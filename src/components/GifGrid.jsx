@@ -3,10 +3,12 @@ import { useFetchGifs } from '../hooks/useFetchGifs';
 import { Button, Container, Row } from 'react-bootstrap';
 import { arrayBreak } from '../helpers/arrayBreaker';
 
+const limitBreak = 5;
+
 export const GifGrid = ({ type, category, onRemoveCategory }) => {
 
     const { images, isLoading } = useFetchGifs(type, category, 10);
-    const imagesArray = arrayBreak(images, 5);
+    const imagesArray = arrayBreak(images, limitBreak);
     return (
         <>
             <Container>
@@ -17,7 +19,7 @@ export const GifGrid = ({ type, category, onRemoveCategory }) => {
                 <div>
                     {
                         imagesArray.map((images, i) => (
-                            <Row key={i} className="my-3">
+                            <Row key={i} className='my-3 g-'{...limitBreak}>
                                 {
                                     images.map((image, i) => (
                                         <GifGridItem
@@ -31,7 +33,6 @@ export const GifGrid = ({ type, category, onRemoveCategory }) => {
                         ))
                     }
                 </div>
-                <Button variant='danger' onClick={() => onRemoveCategory(category)}>Eliminar Categoría</Button>
             </Container>
         </>
     )
