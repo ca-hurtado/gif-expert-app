@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { Col, Container, Form, Navbar, Row } from 'react-bootstrap';
+import { Col, Container, Form, Nav, Navbar, Row } from 'react-bootstrap';
 import { AddCategory, GifGrid, GifItem } from './components';
 import { DeleteCategory } from './components/DeleteCategory';
 
@@ -38,7 +38,7 @@ export const GifExpertApp = () => {
                     </Navbar.Collapse>
                 </Container>
             </Navbar>
-            <section className='bg-light'>
+            <div className='bg-light'>
                 <Container className='py-5 px-0 d-flex'>
                     <Container className='d-flex align-self-center flex-column'>
                         <Row>
@@ -58,7 +58,8 @@ export const GifExpertApp = () => {
                         </Row>
                     </Container>
                 </Container>
-            </section>
+            </div>
+            <AddCategory onNewCategory={onAddCategory}/>
             <div className='border'>
                 <Container className='py-3'>
                     <Form>
@@ -93,7 +94,7 @@ export const GifExpertApp = () => {
                     ))
                 }
             </div>
-            <div>
+            {/* <div>
                 <Container>
                     <Col>
                         <Row className='my-3'>
@@ -102,7 +103,7 @@ export const GifExpertApp = () => {
                         </Row>
                     </Col>
                 </Container>
-            </div>
+            </div> */}
             <footer className='bg-dark text-white'>
                 <Container className='py-3'>
                     <p>Phasellus non blandit leo. Cras consequat magna eu justo pulvinar, eget ullamcorper risus lobortis. Praesent non orci id arcu aliquam dignissim ut id tortor.</p>
