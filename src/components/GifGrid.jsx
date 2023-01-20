@@ -5,10 +5,11 @@ import { arrayBreak } from '../helpers/arrayBreaker';
 
 const limitBreak = 5;
 
-export const GifGrid = ({ type, category, onRemoveCategory }) => {
+export const GifGrid = ({ type, category }) => {
 
     const { images, isLoading } = useFetchGifs(type, category, 10);
     const imagesArray = arrayBreak(images, limitBreak);
+    
     return (
         <>
             <Container>

@@ -1,9 +1,7 @@
-import { Button, Container } from 'react-bootstrap'
+import { Button } from 'react-bootstrap'
 
-export const DeleteCategory = ({category, onRemoveCategory}) => {
+export const DeleteCategory = ({ category, onRemoveCategory }) => {
     return (
-        <Container>
-            <Button variant='danger' onClick={() => onRemoveCategory(category)}>Delete Category</Button>
-        </Container>
+        <Button variant='danger' onClick={() => onRemoveCategory(category)}>Delete Category</Button>
     )
 }

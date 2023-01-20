@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import { Col, Container, Form, Nav, Navbar, Row } from 'react-bootstrap';
 import { AddCategory, GifGrid, GifItem } from './components';
+import { AddImages } from './components/AddImages';
 import { DeleteCategory } from './components/DeleteCategory';
 
 export const GifExpertApp = () => {
@@ -59,7 +60,7 @@ export const GifExpertApp = () => {
                     </Container>
                 </Container>
             </div>
-            <AddCategory onNewCategory={onAddCategory}/>
+            <AddCategory onNewCategory={onAddCategory} />
             <div className='border'>
                 <Container className='py-3'>
                     <Form>
@@ -72,7 +73,6 @@ export const GifExpertApp = () => {
                 </Container>
             </div>
             <div>
-
                 {
                     filteredCategories.map(category => (
                         <Container fluid className='bg-light' key={category}>
@@ -86,24 +86,19 @@ export const GifExpertApp = () => {
                             </Row>
                             <Row className='py-3 border border-top-0 bg-white'>
                                 <Col>
-                                    <DeleteCategory category={category}
-                                        onRemoveCategory={onRemoveCategory} />
+                                    <Container>
+                                        <AddImages category={category}
+                                            onRemoveCategory={onRemoveCategory} />
+                                        <DeleteCategory category={category}
+                                            onRemoveCategory={onRemoveCategory} />
+                                    </Container>
                                 </Col>
+
                             </Row>
                         </Container>
                     ))
                 }
             </div>
-            {/* <div>
-                <Container>
-                    <Col>
-                        <Row className='my-3'>
-                            <AddCategory
-                                onNewCategory={onAddCategory} />
-                        </Row>
-                    </Col>
-                </Container>
-            </div> */}
             <footer className='bg-dark text-white'>
                 <Container className='py-3'>
                     <p>Phasellus non blandit leo. Cras consequat magna eu justo pulvinar, eget ullamcorper risus lobortis. Praesent non orci id arcu aliquam dignissim ut id tortor.</p>
