@@ -18,7 +18,11 @@ export const AddCategory = ({ onNewCategory }) => {
 
         const newInputValue = inputValue.trim();
         if (newInputValue.length <= 1) return;
-        onNewCategory(newInputValue);
+        onNewCategory({
+            name: newInputValue,
+            limit: 10,
+            offset: 0
+        });
         setInputValue('');
         handleClose();
     }

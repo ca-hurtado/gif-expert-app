@@ -5,27 +5,27 @@ import { AddImages } from './components/AddImages';
 import { DeleteCategory } from './components/DeleteCategory';
 
 export const GifExpertApp = () => {
-    const [categories, setCategories] = useState(['One Punch']);
+    const [categories2, setCategories2] = useState
+        ([{
+            name: 'One Punch',
+            limit: 10,
+            offset: 0
+        }]);
+
     const [inputValue, setInputValue] = useState("");
 
-    const filteredCategories = categories.filter(category => {
-        return category.toLowerCase().includes(inputValue.toLowerCase())
-    });
+    const filteredCategories2 = categories2.filter(categories => categories['name'].toLowerCase().includes(inputValue.toLowerCase()));
 
-    const onAddCategory = (newCategory) => {
-        if (categories.includes(newCategory)) return;
-        setCategories([newCategory, ...categories]);
+    const onAddCategory2 = (newCategory) => {
+        if (categories2.some(category => category['name'].includes(newCategory['name']))) return;
+        setCategories2([newCategory, ...categories2]);
     }
 
-    const onRemoveCategory = (category) => {
-        if (!categories.includes(category)) {
-            return;
-        }
-        setCategories(prevCategories => {
-            return prevCategories.filter(item =>
-                !item.includes(category)
-            )
-        })
+    const onRemoveCategory2 = (actualCategory) => {
+        if (!categories2.some(category => category['name'].includes(actualCategory))) return;
+        setCategories2(prevCategories => {
+            return prevCategories.filter(category => !category['name'].includes(actualCategory))
+        });
     }
 
     return (
@@ -60,7 +60,7 @@ export const GifExpertApp = () => {
                     </Container>
                 </Container>
             </div>
-            <AddCategory onNewCategory={onAddCategory} />
+            <AddCategory onNewCategory={onAddCategory2} />
             <div className='border'>
                 <Container className='py-3'>
                     <Form>
@@ -74,23 +74,23 @@ export const GifExpertApp = () => {
             </div>
             <div>
                 {
-                    filteredCategories.map(category => (
-                        <Container fluid className='bg-light' key={category}>
+                    filteredCategories2.map(category => (
+                        <Container fluid className='bg-light' key={category['name']}>
                             <Row className='py-5 border border-top-0'>
                                 <Col>
                                     <GifGrid
-                                        key={category}
+                                        key={category['name']}
                                         type="query"
-                                        category={category} />
+                                        category={category['name']} />
                                 </Col>
                             </Row>
                             <Row className='py-3 border border-top-0 bg-white'>
                                 <Col>
                                     <Container>
-                                        <AddImages category={category}
-                                            onRemoveCategory={onRemoveCategory} />
-                                        <DeleteCategory category={category}
-                                            onRemoveCategory={onRemoveCategory} />
+                                        <AddImages category={category['name']}
+                                            onRemoveCategory={onRemoveCategory2} />
+                                        <DeleteCategory category={category['name']}
+                                            onRemoveCategory={onRemoveCategory2} />
                                     </Container>
                                 </Col>
 
