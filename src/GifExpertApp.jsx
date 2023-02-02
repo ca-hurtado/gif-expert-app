@@ -1,31 +1,40 @@
 import React, { useState } from 'react'
-import { Col, Container, Form, Nav, Navbar, Row } from 'react-bootstrap';
+import { Col, Container, Form, Navbar, Row } from 'react-bootstrap';
 import { AddCategory, GifGrid, GifItem } from './components';
-import { AddImages } from './components/AddImages';
-import { DeleteCategory } from './components/DeleteCategory';
 
 export const GifExpertApp = () => {
-    const [categories2, setCategories2] = useState
-        ([{
-            name: 'One Punch',
+    const [categories, setCategories] = useState(
+        [{
+            name: 'Megaman',
             limit: 10,
-            offset: 0
-        }]);
+            offset: 0,
+            images: []
+        }]
+    );
 
     const [inputValue, setInputValue] = useState("");
 
-    const filteredCategories2 = categories2.filter(categories => categories['name'].toLowerCase().includes(inputValue.toLowerCase()));
+    const filteredcategories = categories.filter(categories => categories['name'].toLowerCase().includes(inputValue.toLowerCase()));
 
-    const onAddCategory2 = (newCategory) => {
-        if (categories2.some(category => category['name'].includes(newCategory['name']))) return;
-        setCategories2([newCategory, ...categories2]);
+    const onAddCategory = (newCategory) => {
+        if (categories.some(category => category['name'].includes(newCategory['name']))) return;
+        setCategories([newCategory, ...categories]);
     }
 
-    const onRemoveCategory2 = (actualCategory) => {
-        if (!categories2.some(category => category['name'].includes(actualCategory))) return;
-        setCategories2(prevCategories => {
+    const onRemoveCategory = (actualCategory) => {
+        if (!categories.some(category => category['name'].includes(actualCategory))) return;
+        setCategories(prevCategories => {
             return prevCategories.filter(category => !category['name'].includes(actualCategory))
         });
+    }
+
+    const onUpdateImagesCategory = (category) => {
+        const newCategories = categories.map((actualCategory, i) => {
+            console.log(actualCategory['name']);
+            if(actualCategory.name == category.name) 
+                actualCategory = category;
+        })
+        setCategories(newCategories);
     }
 
     return (
@@ -33,10 +42,6 @@ export const GifExpertApp = () => {
             <Navbar bg='dark' variant='dark' expand='lg'>
                 <Container>
                     <Navbar.Brand href='#home'>GIF Expert App</Navbar.Brand>
-                    <Navbar.Toggle aria-controls="navbarScroll" />
-                    <Navbar.Collapse className="justify-content-end">
-
-                    </Navbar.Collapse>
                 </Container>
             </Navbar>
             <div className='bg-light'>
@@ -60,7 +65,7 @@ export const GifExpertApp = () => {
                     </Container>
                 </Container>
             </div>
-            <AddCategory onNewCategory={onAddCategory2} />
+            <AddCategory onNewCategory={onAddCategory} />
             <div className='border'>
                 <Container className='py-3'>
                     <Form>
@@ -74,27 +79,13 @@ export const GifExpertApp = () => {
             </div>
             <div>
                 {
-                    filteredCategories2.map(category => (
+                    filteredcategories.map(category => (
                         <Container fluid className='bg-light' key={category['name']}>
-                            <Row className='py-5 border border-top-0'>
-                                <Col>
-                                    <GifGrid
-                                        key={category['name']}
-                                        type="query"
-                                        category={category['name']} />
-                                </Col>
-                            </Row>
-                            <Row className='py-3 border border-top-0 bg-white'>
-                                <Col>
-                                    <Container>
-                                        <AddImages category={category['name']}
-                                            onRemoveCategory={onRemoveCategory2} />
-                                        <DeleteCategory category={category['name']}
-                                            onRemoveCategory={onRemoveCategory2} />
-                                    </Container>
-                                </Col>
-
-                            </Row>
+                            <GifGrid
+                                type="query"
+                                category={category}
+                                onRemoveCategory={onRemoveCategory}
+                                onUpdateImagesCategory={onUpdateImagesCategory} />
                         </Container>
                     ))
                 }

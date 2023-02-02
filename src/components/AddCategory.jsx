@@ -21,7 +21,8 @@ export const AddCategory = ({ onNewCategory }) => {
         onNewCategory({
             name: newInputValue,
             limit: 10,
-            offset: 0
+            offset: 0,
+            images: []
         });
         setInputValue('');
         handleClose();
