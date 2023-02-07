@@ -1,7 +1,7 @@
 import { Button } from "react-bootstrap"
 
-export const AddImages = () => {
+export const AddImages = ({category, onUpdateImagesCategory}) => {
   return (
-    <Button className="me-3" variant='success' onClick={() => onRemoveCategory(category)}>Add Images</Button>
+    <Button className="me-3" variant='success' onClick={() => onUpdateImagesCategory(category)}>Add Images</Button>
   )
 }
