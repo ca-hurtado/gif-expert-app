@@ -8,9 +8,9 @@ export const GifGrid = ({ type, category, onRemoveCategory, onUpdateImagesCatego
     const { images, isLoading } = useFetchGifs(type, category['name'], category['limit'], category['offset']);
     //onUpdateImagesCategory(category, images)
 
-    useEffect(() => {
+    /*useEffect(() => {
         onUpdateImagesCategory(category)
-    }, [images])
+    }, [images])*/
 
 
     return (
